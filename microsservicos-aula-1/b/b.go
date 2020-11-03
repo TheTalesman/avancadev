@@ -31,7 +31,12 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if resultCoupon.Status == "invalid" {
+		fmt.Println(resultCoupon.Status)
 		result.Status = "invalid coupon"
+	}
+	if resultCoupon.Status == "Servidor fora do ar!" {
+		fmt.Println(resultCoupon.Status)
+		result.Status = "Servidor fora do ar!"
 	}
 
 	jsonData, err := json.Marshal(result)
@@ -41,7 +46,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprintf(w, string(jsonData))
 }
-
 
 func makeHttpCall(urlMicroservice string, coupon string) Result {
 
@@ -64,7 +68,7 @@ func makeHttpCall(urlMicroservice string, coupon string) Result {
 	result := Result{}
 
 	json.Unmarshal(data, &result)
-
+	fmt.Println(result)
 	return result
 
 }
