@@ -1,7 +1,25 @@
 version: '3'
 
 services:
-
+  microservico-a:
+    image: thetalesman/fullcycle-a
+    ports:
+      - "9090:9090"
+    depends_on: 
+      - rabbit
+    restart: on-failure
+  microservico-b:
+    image: thetalesman/fullcycle-b
+    ports:
+      - "9091:9091"
+    depends_on: 
+      - rabbit
+    restart: on-failure
+  microservico-c:
+    image: thetalesman/fullcycle-c
+    ports:
+      - "9092:9092"
+    restart: on-failure
   rabbit:
     image: "rabbitmq:3-management"
     environment:
